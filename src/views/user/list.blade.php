@@ -19,7 +19,9 @@
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->password }}</td>
-                    <td><a href="/user/{{ $user->id }}" class="btn btn-primary">Mostrar</a></td>
+                    <td>
+                        <a href="/user/{{ $user->id }}" class="col btn btn-primary">Mostrar</a>
+                    </td>
                 </tr>
             @empty
                 <tr>

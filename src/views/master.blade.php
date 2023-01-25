@@ -27,14 +27,31 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user">Usuarios</a>
-                    </li>
+                    @isset($_SESSION['name'])
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/party">Partidas</a>
+                        </li>
+                    @endisset
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
+                <ul class="navbar-nav">
+                    @if (isset($_SESSION['name']))
+                        <span>Hola {{ $_SESSION['name'] }}!!</span>
+                        <li class="nav-item">
+                            <a class="btn btn-danger ml-2" href="/logout">Log Out</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="btn btn-primary ml-2" href="/login">Log In</a>
+                        </li>
+                    @endif
+                </ul>
             </div>
         </div>
     </nav>

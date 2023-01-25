@@ -13,14 +13,14 @@ class userController
     {
         global $blade;
         $users = User::all();
-        echo $blade->view()->make('list', compact('users'))->render();
+        echo $blade->view()->make('user.list', compact('users'))->render();
     }
 
     // Show the form for creating a new resource.
     public function create()
     {
         global $blade;
-        echo $blade->view()->make('create')->render();
+        echo $blade->view()->make('user.create')->render();
     }
 
     // Store a newly created resource in storage.
@@ -43,21 +43,40 @@ class userController
         $id = $param['id'];
         $user = User::find($id);
         global $blade;
-        echo $blade->view()->make('show', compact('user'))->render();
+        echo $blade->view()->make('user.show', compact('user'))->render();
     }
 
     //Show the form for editing the specified resource.
-    public function edit($id)
+    public function edit($param)
     {
+        $id = $param['id'];
+        $user = User::find($id);
+        global $blade;
+        echo $blade->view()->make('user.edit', compact('user'))->render();
     }
 
     //Update the specified resource in storage.
-    public function update($id)
+    public function update($param)
     {
+        $id = $param['id'];
+        $user = User::find($id);
+
+        $name = $_POST['name'];
+        $passw = $_POST['password'];
+
+        $user->name = $name;
+        $user->password = $passw;
+        $user->save();
+        header('Location: /user');
     }
 
     //Remove the specified resource from storage.
-    public function destroy($id)
+    public function destroy($param)
     {
+        $id = $param['id'];
+        $user = User::find($id);
+
+        $user->delete();
+        header('Location: /user');
     }
 }
